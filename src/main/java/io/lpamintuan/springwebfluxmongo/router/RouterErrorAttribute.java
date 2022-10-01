@@ -1,17 +1,16 @@
-package io.lpamintuan.springwebfluxmongo.router.exceptions.handler;
+package io.lpamintuan.springwebfluxmongo.router;
 
 import java.util.Map;
 
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 
 import io.lpamintuan.springwebfluxmongo.router.exceptions.APIException;
 
 @Component
-public class GlobalAPIErrorAttribute extends DefaultErrorAttributes {
+public class RouterErrorAttribute extends DefaultErrorAttributes {
 
     @Override
     public Map<String, Object> getErrorAttributes(ServerRequest request, ErrorAttributeOptions options) {
