@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.lpamintuan</groupId>
-	<artifactId>spring-webflux-mongo</artifactId>
+	<artifactId>spring-webflux-poc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-webflux-mongo</name>
+	<name>spring-webflux-poc</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>

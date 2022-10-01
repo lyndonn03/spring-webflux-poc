@@ -22,12 +22,11 @@ services:
       - mongodb
 
   mongodb:
-    image: mongo:latest
-    restart: always
+    image: mongo
     environment:
-      - MONGO_INITDB_DATABASE=${MONGO_DATABASE}
       - MONGO_DB_USERNAME=${MONGO_USERNAME}
       - MONGO_DB_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_DB_DATABASE=${MONGO_DATABASE}
     networks:
       - appnet
     volumes:
