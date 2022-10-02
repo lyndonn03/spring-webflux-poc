@@ -7,7 +7,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import io.lpamintuan.springwebfluxmongo.models.Product;
 import io.lpamintuan.springwebfluxmongo.repositories.ProductRepository;
-import io.lpamintuan.springwebfluxmongo.router.RouterObjectValidator;
+import io.lpamintuan.springwebfluxmongo.router._config.RouterObjectValidator;
 import reactor.core.publisher.Mono;
 
 @Component

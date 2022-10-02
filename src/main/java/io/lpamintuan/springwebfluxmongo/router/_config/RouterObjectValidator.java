@@ -1,4 +1,4 @@
-package io.lpamintuan.springwebfluxmongo.router;
+package io.lpamintuan.springwebfluxmongo.router._config;
 
 import java.util.Map;
 import java.util.stream.Collectors;

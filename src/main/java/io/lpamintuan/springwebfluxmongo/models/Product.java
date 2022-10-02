@@ -1,7 +1,6 @@
 package io.lpamintuan.springwebfluxmongo.models;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
@@ -22,12 +21,10 @@ public class Product {
     @Id
     private String id;
 
-    @NotNull
-    @NotEmpty(message = "Name must not be null.")
+    @NotEmpty(message = "Name must not be empty.")
     private String name;
 
-    @NotNull
-    @NotEmpty(message = "Code must not be null.")
+    @NotEmpty(message = "Code must not be empty.")
     @Size(min = 3, message = "Code must have size of atleast 3.")
     private String code;
     

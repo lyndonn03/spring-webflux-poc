@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import io.lpamintuan.springwebfluxmongo.router.handlers.ProductRouteHandlers;
 
 @Configuration
-public class RouterConfig {
+public class ProductRouterConfig {
 
     @Autowired
     private ProductRouteHandlers productRouteHandlers;

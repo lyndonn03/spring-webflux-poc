@@ -1,4 +1,4 @@
-package io.lpamintuan.springwebfluxmongo.router;
+package io.lpamintuan.springwebfluxmongo.router.handlers;
 
 import java.util.Map;
 
@@ -15,9 +15,9 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 @Component
-public class RouterErrorHandler extends AbstractErrorWebExceptionHandler {
+public class RouteErrorHandler extends AbstractErrorWebExceptionHandler {
 
-    public RouterErrorHandler(ErrorAttributes errorAttributes, Resources resources,
+    public RouteErrorHandler(ErrorAttributes errorAttributes, Resources resources,
             ApplicationContext applicationContext, ServerCodecConfigurer codecConfigurer) {
         super(errorAttributes, resources, applicationContext);
         this.setMessageReaders(codecConfigurer.getReaders());
