@@ -1,15 +1,17 @@
 package io.lpamintuan.springwebfluxmongo.router.exceptions;
 
+import org.springframework.http.HttpStatus;
+
 import lombok.Getter;
 
 @Getter
 public class APIException extends RuntimeException {
 
-    private int statusCode;
-
-    public APIException(String message, int statusCode) {
+    private HttpStatus status;
+    
+    public APIException(String message, HttpStatus status) {
         super(message);
-        this.statusCode = statusCode;
+        this.status = status;
     }
     
 }

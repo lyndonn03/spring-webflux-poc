@@ -17,8 +17,9 @@ public class RouterErrorAttribute extends DefaultErrorAttributes {
         Map<String, Object> errors = super.getErrorAttributes(request, options);
         APIException ex = (APIException) this.getError(request);
         errors.remove("requestId");
+        errors.put("error", ex.getStatus().getReasonPhrase());
+        errors.put("status", ex.getStatus().value());
         errors.put("message", ex.getMessage());
-        errors.put("status", ex.getStatusCode());
         return errors;
     }
     

@@ -20,20 +20,20 @@ public class ProductRouteHandlers {
     public Mono<ServerResponse> getProducts(ServerRequest request) {
 
         return ServerResponse.ok().body(productRepository.findAll(), Product.class);
-        
+
     }
 
     public Mono<ServerResponse> postProduct(ServerRequest request) {
 
         return request.bodyToFlux(Product.class)
-                    .flatMap(x -> {
-                        if(x.getName() == null || x.getName().isEmpty())
-                            return Mono.error(new APIException("Name must not be null.", HttpStatus.BAD_REQUEST.value()));
-                        return productRepository.insert(x)
-                                    .then(ServerResponse.ok().bodyValue(x));
-                    })
-                    .next();
+                .flatMap(x -> {
+                    if(x.getName() == null || x.getName().isEmpty())
+                        return Mono.error(new APIException("fuck error.", HttpStatus.BAD_REQUEST));
+                    return productRepository.insert(x);
+                })
+                .next()
+                .flatMap(x -> ServerResponse.ok().bodyValue(x));
 
     }
-    
+
 }
