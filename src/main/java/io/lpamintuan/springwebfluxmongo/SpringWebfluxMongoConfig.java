@@ -41,6 +41,7 @@ public class SpringWebfluxMongoConfig {
 
         http.authorizeExchange()
             .pathMatchers(HttpMethod.POST, "/products").authenticated()
+            .pathMatchers(HttpMethod.GET, "/profile").authenticated()
             .pathMatchers(HttpMethod.POST, "/users").permitAll()
             .pathMatchers(HttpMethod.GET, "/products", "/users", "/users/**").permitAll()
             .and()

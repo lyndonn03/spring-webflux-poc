@@ -21,6 +21,7 @@ public class UserAccountRouterConfig {
                 .POST("/users", handlers::createUserAccount)
                 .GET("/users", handlers::getAllUserAccounts)
                 .GET("/users/{id}", handlers::getUserAccount)
+                .GET("/profile", handlers::getUserProfile)
                 .build();
     }
     

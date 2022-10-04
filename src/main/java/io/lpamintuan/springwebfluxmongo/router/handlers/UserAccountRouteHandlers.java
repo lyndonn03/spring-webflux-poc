@@ -2,6 +2,7 @@ package io.lpamintuan.springwebfluxmongo.router.handlers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -38,6 +39,11 @@ public class UserAccountRouteHandlers {
                             .switchIfEmpty(Mono.error(new APIException("No user found", HttpStatus.NOT_FOUND)));
                 })
                 .flatMap(x -> ServerResponse.ok().bodyValue(x));
+    }
+
+    public Mono<ServerResponse> getUserProfile(ServerRequest request) {
+        return ReactiveSecurityContextHolder.getContext()
+                .flatMap(x -> ServerResponse.ok().bodyValue(x.getAuthentication().getPrincipal()));
     }
 
 }
