@@ -1,6 +1,8 @@
 package io.lpamintuan.springwebfluxmongo.models;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -9,6 +11,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
@@ -51,21 +54,25 @@ public class UserAccount implements UserDetails {
     @Getter(value = AccessLevel.NONE)
     private Boolean isEnabled;
 
+    private Set<GrantedAuthority> authorities;
+
     public UserAccount(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
     public UserAccount() {
-        this.isAccountNonExpired = false;
-        this.isCredentialsNonExpired = false;
-        this.isAccountNonExpired = false;
+        this.isAccountNonExpired = true;
+        this.isCredentialsNonExpired = true;
+        this.isAccountNonLocked = true;
         this.isEnabled = true;
+        this.authorities = new HashSet<>();
+        this.authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.authorities;
     }
 
     @Override
@@ -81,19 +88,19 @@ public class UserAccount implements UserDetails {
     @JsonGetter(value = "isAccountNonExpired")
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return this.isAccountNonExpired;
     }
 
     @JsonGetter(value = "isAccountNonLocked")
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return this.isAccountNonLocked;
     }
 
     @JsonGetter(value = "isCredentialsNonExpired")
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return this.isCredentialsNonExpired;
     }
 
     @JsonGetter(value = "isEnabled")

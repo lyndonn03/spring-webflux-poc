@@ -23,6 +23,8 @@ services:
 
   mongodb:
     image: mongo
+    ports:
+      - 27017:27017 # for debugging only
     environment:
       - MONGO_DB_USERNAME=${MONGO_USERNAME}
       - MONGO_DB_PASSWORD=${MONGO_PASSWORD}

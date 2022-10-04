@@ -1,6 +1,7 @@
 package io.lpamintuan.springwebfluxmongo.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,6 +13,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Component
+@Primary
 public class UserAccountService implements ReactiveUserDetailsService {
 
     @Autowired
@@ -22,7 +24,8 @@ public class UserAccountService implements ReactiveUserDetailsService {
 
     @Override
     public Mono<UserDetails> findByUsername(String username) {
-        return this.userAccountRepository.findByUsername(username);
+        return this.userAccountRepository.findByUsername(username)
+                .cast(UserDetails.class);
     }
 
     public Mono<UserAccount> createUserAccount(Mono<UserAccount> userAccount) {
@@ -34,5 +37,5 @@ public class UserAccountService implements ReactiveUserDetailsService {
     public Flux<UserAccount> getAllUserAccounts() {
         return userAccountRepository.findAll();
     }
-    
+
 }

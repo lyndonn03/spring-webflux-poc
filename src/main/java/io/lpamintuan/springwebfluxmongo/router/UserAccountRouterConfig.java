@@ -20,6 +20,7 @@ public class UserAccountRouterConfig {
         return RouterFunctions.route()
                 .POST("/users", handlers::createUserAccount)
                 .GET("/users", handlers::getAllUserAccounts)
+                .GET("/users/{id}", handlers::getUserAccount)
                 .build();
     }
     
