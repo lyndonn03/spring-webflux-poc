@@ -22,7 +22,9 @@ public class UserAccountRouterConfig {
                 .GET("/users", handlers::getAllUserAccounts)
                 .GET("/users/{id}", handlers::getUserAccount)
                 .GET("/profile", handlers::getUserProfile)
+                .POST("/signin", handlers::signin)
                 .build();
     }
+    
     
 }

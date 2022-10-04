@@ -11,6 +11,7 @@ import io.lpamintuan.springwebfluxmongo.models.UserAccount;
 import io.lpamintuan.springwebfluxmongo.router._config.RouterObjectValidator;
 import io.lpamintuan.springwebfluxmongo.router.exceptions.APIException;
 import io.lpamintuan.springwebfluxmongo.security.UserAccountService;
+import io.lpamintuan.springwebfluxmongo.templates.UserLoginTemplate;
 import reactor.core.publisher.Mono;
 
 @Component
@@ -21,6 +22,9 @@ public class UserAccountRouteHandlers {
 
     @Autowired
     private RouterObjectValidator<UserAccount> routerObjectValidator;
+
+    @Autowired
+    private RouterObjectValidator<UserLoginTemplate> loginValidator;
 
     public Mono<ServerResponse> createUserAccount(ServerRequest request) {
         return request.bodyToMono(UserAccount.class)
@@ -44,6 +48,12 @@ public class UserAccountRouteHandlers {
     public Mono<ServerResponse> getUserProfile(ServerRequest request) {
         return ReactiveSecurityContextHolder.getContext()
                 .flatMap(x -> ServerResponse.ok().bodyValue(x.getAuthentication().getPrincipal()));
+    }
+
+    public Mono<ServerResponse> signin(ServerRequest request) {
+        return request.bodyToMono(UserLoginTemplate.class)
+                .flatMap(x ->  userAccountService.signinUser(loginValidator.validate(x)))
+                .flatMap(x -> ServerResponse.ok().bodyValue(x));
     }
 
 }

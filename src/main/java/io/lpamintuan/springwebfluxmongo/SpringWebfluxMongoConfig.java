@@ -1,5 +1,7 @@
 package io.lpamintuan.springwebfluxmongo;
 
+import javax.crypto.SecretKey;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.WebProperties.Resources;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import io.lpamintuan.springwebfluxmongo.security.RouterAuthenticationEntryPoint;
 
 @Configuration
@@ -31,6 +35,11 @@ public class SpringWebfluxMongoConfig {
     }
 
     @Bean
+    public SecretKey jjwtKey() {
+        return Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    }
+
+    @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
 
         http.csrf().disable();
@@ -42,7 +51,7 @@ public class SpringWebfluxMongoConfig {
         http.authorizeExchange()
             .pathMatchers(HttpMethod.POST, "/products").authenticated()
             .pathMatchers(HttpMethod.GET, "/profile").authenticated()
-            .pathMatchers(HttpMethod.POST, "/users").permitAll()
+            .pathMatchers(HttpMethod.POST, "/users", "/signin").permitAll()
             .pathMatchers(HttpMethod.GET, "/products", "/users", "/users/**").permitAll()
             .and()
             .exceptionHandling()
